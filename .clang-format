@@ -1,0 +1,14 @@
+---
+BasedOnStyle: LLVM
+IndentWidth: 4
+UseTab: Never
+AllowShortFunctionsOnASingleLine: InlineOnly
+
+PackParameters:
+    BinPack: OnePerLine
+
+PackArguments:
+    BinPack: OnePerLine
+
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
