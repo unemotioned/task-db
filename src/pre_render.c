@@ -6,10 +6,10 @@
 
 #include "../include/pre_render.h"
 
-static void print_sign();
-static void clear_screen();
+static void print_sign(void);
+static void clear_screen(void);
 
-void pre_render() {
+void pre_render(void) {
 
 #ifdef _WIN32
     // to properly print UTF-8 chars
@@ -20,13 +20,13 @@ void pre_render() {
     print_sign();
 }
 
-void clear_screen() {
+void clear_screen(void) {
     const char clear[] = "\x1B[2J\x1B[H";
 
     printf("%s", clear);
 }
 
-void print_sign() {
+void print_sign(void) {
     const char sign[] =
         "\n\n"
         "\t████████╗ █████╗ ███████╗██╗  ██╗    ██████╗ ██████╗ \n"

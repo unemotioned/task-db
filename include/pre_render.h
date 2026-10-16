@@ -1,3 +1,3 @@
 #pragma once
 
-void pre_render();
+void pre_render(void);
