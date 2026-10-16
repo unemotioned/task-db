@@ -1,17 +1,23 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "../include/pre_render.h"
-#ifdef _WIN32
+#if defined(_WIN32)
 #include "../include/menu_win.h"
+#else
+#include "../include/menu_unix.h"
 #endif
 
 int main(void) {
+#if defined(_WIN32)
     pre_render();
 
-#ifdef _WIN32
     if (!menu_win()) {
-        fprintf(stderr, "ERROR: Failed to get the console information: \n");
+        fprintf(stderr, "ERROR: Failed to get the console information\n");
+        return 1;
+    }
+#else
+    if (!menu_unix()) {
+        fprintf(stderr, "ERROR: Failed to display or read the terminal menu\n");
         return 1;
     }
 #endif

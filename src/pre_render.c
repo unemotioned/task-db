@@ -2,6 +2,8 @@
 
 #ifdef _WIN32
 #include <windows.h>
+#else
+#include <ncurses.h>
 #endif
 
 #include "../include/pre_render.h"
@@ -21,9 +23,13 @@ void pre_render(void) {
 }
 
 void clear_screen(void) {
+#ifdef _WIN32
     const char clear[] = "\x1B[2J\x1B[H";
 
     printf("%s", clear);
+#else
+    erase();
+#endif
 }
 
 void print_sign(void) {
@@ -36,5 +42,9 @@ void print_sign(void) {
         "\t   ██║   ██║  ██║███████║██║  ██╗    ██████╔╝██████╔╝\n"
         "\t   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═════╝ ╚═════╝ \n\n\n";
 
+#ifdef _WIN32
     printf("%s", sign);
+#else
+    printw("%s", sign);
+#endif
 }

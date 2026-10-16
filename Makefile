@@ -2,11 +2,26 @@ CC := gcc
 CFLAGS ?= -std=c11 -Wall -Wextra -pedantic -g -O2
 CPPFLAGS += -Iinclude
 
+ifneq ($(OS),Windows_NT)
+ifeq ($(shell uname -s),Darwin)
+NCURSES_PREFIX := $(shell brew --prefix ncurses 2>/dev/null)
+ifneq ($(NCURSES_PREFIX),)
+CPPFLAGS += -I$(NCURSES_PREFIX)/include
+LDFLAGS += -L$(NCURSES_PREFIX)/lib -Wl,-rpath,$(NCURSES_PREFIX)/lib
+endif
+LDLIBS += -lncurses
+else
+LDLIBS += -lncursesw
+endif
+endif
+
 BUILD_DIR := build
 TARGET := $(BUILD_DIR)/td.exe
 SOURCES := $(wildcard src/*.c)
 ifneq ($(OS),Windows_NT)
 SOURCES := $(filter-out src/menu_win.c,$(SOURCES))
+else
+SOURCES := $(filter-out src/menu_unix.c,$(SOURCES))
 endif
 
 OBJECTS := $(patsubst src/%.c,$(BUILD_DIR)/%.o,$(SOURCES))
