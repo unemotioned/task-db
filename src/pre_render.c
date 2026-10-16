@@ -6,7 +6,7 @@
 
 #include "../include/pre_render.h"
 
-void print_sign();
+static void print_sign();
 static void clear_screen();
 
 void pre_render() {

@@ -1,9 +1,10 @@
 #include <stdbool.h>
 #include <stdio.h>
 
-#include "../include/menu_win.h"
-#include "../include/menus.h"
 #include "../include/pre_render.h"
+#ifdef _WIN32
+#include "../include/menu_win.h"
+#endif
 
 int main(void) {
     pre_render();
